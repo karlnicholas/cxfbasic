@@ -5,22 +5,23 @@ import javax.xml.ws.Endpoint;
 import cxfbasic.server.HelloWorldImpl;
 
 public class Server {
-
-    protected Server() throws Exception {
-        // START SNIPPET: publish
+    public static void main(String args[]) throws Exception {
+    	Server server = new Server();
+    	Endpoint endpoint = server.createAndPublish();
+    	System.out.println("Server ready...");
+    }
+    
+    private Endpoint createAndPublish() {
         System.out.println("Starting Server");
         HelloWorldImpl implementor = new HelloWorldImpl();
-        String address = "http://localhost:9000/helloWorld";
-        Endpoint.publish(address, implementor);
-        // END SNIPPET: publish
-    }
-
-    public static void main(String args[]) throws Exception {
-        new Server();
-        System.out.println("Server ready...");
-
-        Thread.sleep(5 * 60 * 1000);
-        System.out.println("Server exiting");
-        System.exit(0);
+        String container = System.getenv().get("CONTAINER");
+        String address = "http://0.0.0.0:9000/helloWorld";
+        if ( container != null ) {
+            address = "http://0.0.0.0:9000/helloWorld";
+        } else {
+            address = "http://localhost:9000/helloWorld";
+        }
+        System.out.println("Address: " + address);
+        return Endpoint.publish(address, implementor);
     }
 }

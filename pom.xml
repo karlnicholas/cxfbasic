@@ -34,63 +34,61 @@
 		</dependency>
 	</dependencies>
 	<build>
-	  <plugins>
-	<plugin>
-	<artifactId>maven-shade-plugin</artifactId>
-	<executions>
-	<execution>
-	<phase>package</phase>
-	<goals>
-	<goal>shade</goal>
-	</goals>
-	<configuration>
-	<createDependencyReducedPom>false</createDependencyReducedPom>
-	<filters>
-	<filter>
-	<artifact>*:*</artifact>
-	<excludes>
-	<exclude>META-INF/*</exclude>
-	<exclude>LICENSE.txt</exclude>
-	<exclude>NOTICE.txt</exclude>
-	<exclude>CHANGES</exclude>
-	<exclude>README</exclude>
-	<exclude>builddef.lst</exclude>
-	<!--  clutter not needed in jar  -->
-	<exclude>resources/grib1/nasa/README*.pdf</exclude>
-	<exclude>resources/grib1/**/readme*.txt</exclude>
-	<exclude>resources/grib2/**/readme*.txt</exclude>
-	<!--TIKA-763: Workaround to avoid including LGPL classes -->
-	<exclude>ucar/nc2/iosp/fysat/Fysat*.class</exclude>
-	<exclude>ucar/nc2/dataset/transform/VOceanSG1*class</exclude>
-	<exclude>ucar/unidata/geoloc/vertical/OceanSG*.class</exclude>
-	</excludes>
-	</filter>
-	</filters>
-	<transformers>
-	<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-	<mainClass>cxfbasic.ServiceRunner</mainClass>
-	</transformer>
-	<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-	<transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
-	<resource>META-INF/LICENSE</resource>
-	<file>target/classes/META-INF/LICENSE</file>
-	</transformer>
-	<transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
-	<resource>META-INF/NOTICE</resource>
-	<file>target/classes/META-INF/NOTICE</file>
-	</transformer>
-	<transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
-	<resource>META-INF/DEPENDENCIES</resource>
-	<file>target/classes/META-INF/DEPENDENCIES</file>
-	</transformer>
-	<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-	<resource>META-INF/cxf/bus-extensions.txt</resource>
-	</transformer>
-	</transformers>
-	</configuration>
-	</execution>
-	</executions>	 
-	</plugin>
-</plugins>
+		<plugins>
+			<plugin>
+				<artifactId>maven-shade-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<createDependencyReducedPom>false</createDependencyReducedPom>
+							<filters>
+								<filter>
+									<artifact>*:*</artifact>
+									<excludes>
+										<exclude>META-INF/*</exclude>
+										<exclude>LICENSE.txt</exclude>
+										<exclude>NOTICE.txt</exclude>
+										<exclude>CHANGES</exclude>
+										<exclude>README</exclude>
+										<exclude>builddef.lst</exclude>
+									</excludes>
+								</filter>
+							</filters>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>cxfbasic.Server</mainClass>
+								</transformer>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+									<resource>META-INF/LICENSE</resource>
+									<file>target/classes/META-INF/LICENSE</file>
+								</transformer>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+									<resource>META-INF/NOTICE</resource>
+									<file>target/classes/META-INF/NOTICE</file>
+								</transformer>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+									<resource>META-INF/DEPENDENCIES</resource>
+									<file>target/classes/META-INF/DEPENDENCIES</file>
+								</transformer>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>META-INF/cxf/bus-extensions.txt</resource>
+								</transformer>
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 	</build>
 </project>
